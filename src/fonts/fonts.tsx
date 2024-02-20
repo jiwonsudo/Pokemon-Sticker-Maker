@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import Galmuri14 from './Galmuri14.woff2'
+import Galmuri14 from './Galmuri14.woff2';
+import Pretendard from './PretendardVariable.woff2';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -8,6 +9,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     src: url(${Galmuri14}) format('truetype');
   }  
+
+  @font-face {
+    font-family: 'Pretendard';
+    src: local('Pretendard');
+    font-style: normal;
+    src: url(${Pretendard}) format('truetype');
+  } 
 `
 
 export { GlobalStyle };
