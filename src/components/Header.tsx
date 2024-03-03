@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HeaderContainer = styled.div`
   width: 100vw;
-  height: 30px;
+  height: 40px;
   background-color: #f00000;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@ const HeaderContainer = styled.div`
 const HeaderTitle = styled.div`
   color: white;
   font-family: Galmuri14;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
 `;
 
