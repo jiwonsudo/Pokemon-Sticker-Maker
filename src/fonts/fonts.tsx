@@ -1,13 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
-import Galmuri14 from './Galmuri14.woff2';
+import Galmuri11 from './Galmuri11.woff2';
 import Pretendard from './PretendardVariable.woff2';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
-    font-family: 'Galmuri14';
-    src: local('Galmuri14');
+    font-family: 'Galmuri11';
+    src: local('Galmuri11');
     font-style: normal;
-    src: url(${Galmuri14}) format('truetype');
+    src: url(${Galmuri11}) format('truetype');
   }  
 
   @font-face {

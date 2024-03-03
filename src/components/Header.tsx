@@ -11,8 +11,8 @@ const HeaderContainer = styled.div`
 
 const HeaderTitle = styled.div`
   color: white;
-  font-family: Galmuri14;
-  font-size: 20px;
+  font-family: Galmuri11;
+  font-size: 24px;
   font-weight: 500;
 `;
 
