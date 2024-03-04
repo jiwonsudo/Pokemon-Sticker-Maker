@@ -4,14 +4,14 @@ import './reset.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { GlobalStyle } from './fonts/fonts';
+import GlobalFonts from './fonts/fonts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
+    <GlobalFonts />
     <App />
   </React.StrictMode>
 );

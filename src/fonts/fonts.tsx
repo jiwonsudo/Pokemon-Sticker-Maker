@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import Galmuri11 from './Galmuri11.woff2';
 import Pretendard from './PretendardVariable.woff2';
 
-const GlobalStyle = createGlobalStyle`
+const GlobalFonts = createGlobalStyle`
   @font-face {
     font-family: 'Galmuri11';
     src: local('Galmuri11');
@@ -18,5 +18,5 @@ const GlobalStyle = createGlobalStyle`
   } 
 `
 
-export { GlobalStyle };
+export default GlobalFonts;
 
