@@ -1,9 +1,11 @@
-import Seal from "components/StickerView";
+import { Header, Content, Footer } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <Seal></Seal>
+      <Header></Header>
+      <Content></Content>
+      <Footer></Footer>
     </div>
   );
 }

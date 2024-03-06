@@ -1,17 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-import testImage from 'test.png';
-import logo from 'logo.svg';
-
-const SealContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Pretendard;
-  background-color: #434343;
-`;
+import testImage from 'assets/test.png';
+import logo from 'assets/logo.svg';
 
 const SealBackground = styled.div`
   width: 300px;
@@ -30,7 +20,7 @@ const SealIndexContainer = styled.div`
   box-shadow: 1px 1px 3px 1px #d6d6d6;
 `;
 
-const SealNumber = styled.div<{ $bgColor? : string}>`
+const SealNumber = styled.div<{ $bgColor?: string }>`
   height: 30px;
   margin-right: 5px;
   padding: 0 10px;
@@ -50,12 +40,10 @@ const ImageContainer = styled.div`
   height: 260px;
 `;
 
-const Image = styled.div`
+const Image = styled.img`
   width: 100%;
   height: 100%;
-  background-image: url(${testImage});
-  background-size: contain;
-  background-repeat: no-repeat;
+  filter: drop-shadow(2px 2px 2px 2px #f0f0f0);
 `;
 
 const CreatorTitleSection = styled.div`
@@ -85,33 +73,44 @@ const CreatorTitleImage = styled.div`
   opacity: 80%;
 `;
 
-const CreatorTitle = styled.div`
-`;
+const CreatorTitle = styled.div``;
+
+
+interface SealProps {
+  id: string,
+  title: string,
+  imgUri: string,
+}
+
 
 const Seal = () => {
-  return <SealView/>
-};
+  const props = {
+    id: '103',
+    title: '파이리',
+    imgUri: testImage,
+  }
 
-const SealView = ({}) => {
-  return(
-    <SealContainer>
-      <SealBackground>
-        <SealIndexContainer>
-          <SealNumber>15331</SealNumber>
-          <SealTitle>파이리</SealTitle>
-        </SealIndexContainer>
-        <ImageContainer>
-          <Image/>
-        </ImageContainer>
-        <CreatorTitleSection>
-          <CreatorTitleContainer>
-            <CreatorTitleImage></CreatorTitleImage>
-            <CreatorTitle>Wonkémon</CreatorTitle>
-          </CreatorTitleContainer>
-        </CreatorTitleSection>
-      </SealBackground>
-    </SealContainer>
+  return <SealView {...props} />;
+}
+
+const SealView = ({ id, title, imgUri } : SealProps) => {
+  return (
+    <SealBackground>
+      <SealIndexContainer>
+        <SealNumber>{ id }</SealNumber>
+        <SealTitle>{ title }</SealTitle>
+      </SealIndexContainer>
+      <ImageContainer>
+        <Image src={ imgUri } />
+      </ImageContainer>
+      <CreatorTitleSection>
+        <CreatorTitleContainer>
+          <CreatorTitleImage></CreatorTitleImage>
+          <CreatorTitle>Wonkémon</CreatorTitle>
+        </CreatorTitleContainer>
+      </CreatorTitleSection>
+    </SealBackground>
   );
-};
+}
 
 export default Seal;
