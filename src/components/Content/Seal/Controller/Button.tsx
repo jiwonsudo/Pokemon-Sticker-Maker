@@ -1,11 +1,20 @@
 import styled from "styled-components";
 
-const TextField = styled.input`
-  width: 150px;
-  padding-left: 8px;
-  font-size: 16px;
-  background-color: #f0f0f0;
+interface ButtonProps {
+  $bgColor?: string,
+  $color?: string,
+  $activeBgColor?: string,
+  $activeColor?: string,
+}
+
+const Button = styled.button<ButtonProps>`
+  padding: 15px;
+  line-height: 0;
+  font-size: 14px;
   font-family: Galmuri11;
+  border: none;
+  color: ${ props => props.$color ? props.$color : '#222224' };
+  background-color: ${ props => props.$bgColor ? props.$bgColor : '#f0f0f0' };
   clip-path: polygon(
     0px calc(100% - 6px),
     3px calc(100% - 6px),
@@ -28,6 +37,11 @@ const TextField = styled.input`
     3px 6px,
     0px 6px
   );
+
+  &:active {
+    background-color: #b0b0b0;
+    color: #eaeaf8;
+  }
 `;
 
-export default TextField;
+export default Button;
