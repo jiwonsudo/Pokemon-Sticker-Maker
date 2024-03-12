@@ -75,13 +75,11 @@ const CreatorTitleImage = styled.div`
 
 const CreatorTitle = styled.div``;
 
-
 interface SealProps {
   id: string,
   title: string,
   imgUri: string,
 }
-
 
 const Seal = () => {
   const props = {
