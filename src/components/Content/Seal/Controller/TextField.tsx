@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-const TextField = styled.input`
+const TextField = styled.input.attrs({ maxLength: 6 })`
   width: 150px;
+  height: 24px;
   padding-left: 8px;
   font-size: 14px;
   background-color: #f0f0f0;

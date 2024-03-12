@@ -8,6 +8,7 @@ interface ButtonProps {
 }
 
 const Button = styled.button<ButtonProps>`
+  height: 24px;
   padding: 15px;
   line-height: 0;
   font-size: 14px;
@@ -39,8 +40,8 @@ const Button = styled.button<ButtonProps>`
   );
 
   &:active {
-    background-color: #b0b0b0;
-    color: #eaeaf8;
+    background-color: ${ props => props.$activeBgColor ? props.$activeBgColor : '#b0b0b0' };
+    color: ${ props => props.$activeColor ? props.$activeColor : '#eaeaf8' };
   }
 `;
 
