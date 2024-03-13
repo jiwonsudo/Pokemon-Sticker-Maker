@@ -1,7 +1,7 @@
 import Seal from './Seal';
 import SealSection from './SealSection';
 import ContentWrapper from './ContentWrapper';
-import Controller from './Seal/Controller';
+import Controller from './Controller';
 
 const Content = () => {
   return (
