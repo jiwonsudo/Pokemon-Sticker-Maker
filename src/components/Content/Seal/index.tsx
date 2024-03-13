@@ -43,7 +43,7 @@ const ImageContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  filter: drop-shadow(2px 2px 2px 2px #f0f0f0);
+  filter: drop-shadow(1px 1px 3px #848484);
 `;
 
 const CreatorTitleSection = styled.div`
