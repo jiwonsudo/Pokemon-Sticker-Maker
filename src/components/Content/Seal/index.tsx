@@ -2,16 +2,18 @@ import styled from "styled-components";
 
 import testImage from 'assets/test.png';
 import logo from 'assets/logo.svg';
+import stickerTexture from 'assets/sticker_texture.png';
 
 const SealBackground = styled.div`
   width: 300px;
   height: 400px;
-  background-color: #ffffff;
+  background-color: #f6f3f3;
 `;
 
 const SealIndexContainer = styled.div`
   height: 30px;
   margin: 10px;
+  position: relative;
   display: inline-flex;
   align-items: center;
   background-color: white;
@@ -46,6 +48,18 @@ const Image = styled.img`
   filter: drop-shadow(1px 1px 3px #848484);
 `;
 
+const CoverTextureImg = styled.img.attrs({ src: stickerTexture })`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: 30px;
+  z-index: 2;
+  object-fit: cover;
+  mix-blend-mode: darken;
+  opacity: 40%;
+`;
+
 const CreatorTitleSection = styled.div`
   width: 100%;
   height: 50px;
@@ -57,23 +71,24 @@ const CreatorTitleSection = styled.div`
 const CreatorTitleContainer = styled.div`
   margin: 0 10px;
   padding: 5px;
+  height: 15px;
   background-color: white;
+  position: relative;
   display: inline-flex;
   font-size: 14px;
   border-radius: 30px;
   box-shadow: 1px 1px 3px 1px #d6d6d6;
 `;
 
-const CreatorTitleImage = styled.div`
+const CreatorTitleImage = styled.img.attrs({ src: logo })`
   margin-right: 5px;
   width: 15px;
   aspect-ratio: 1 / 1;
-  background-image: url(${logo});
-  background-size: contain;
   opacity: 80%;
 `;
 
 const CreatorTitle = styled.div``;
+
 
 interface SealProps {
   id: string,
@@ -97,6 +112,7 @@ const SealView = ({ id, title, imgUri } : SealProps) => {
       <SealIndexContainer>
         <SealNumber>{ id }</SealNumber>
         <SealTitle>{ title }</SealTitle>
+        <CoverTextureImg></CoverTextureImg>
       </SealIndexContainer>
       <ImageContainer>
         <Image src={ imgUri } />
@@ -105,6 +121,7 @@ const SealView = ({ id, title, imgUri } : SealProps) => {
         <CreatorTitleContainer>
           <CreatorTitleImage></CreatorTitleImage>
           <CreatorTitle>Wonkémon</CreatorTitle>
+          <CoverTextureImg></CoverTextureImg>
         </CreatorTitleContainer>
       </CreatorTitleSection>
     </SealBackground>
