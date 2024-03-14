@@ -94,6 +94,7 @@ interface SealProps {
   id: string,
   title: string,
   imgUri: string,
+  rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
 }
 
 const Seal = () => {
@@ -101,14 +102,17 @@ const Seal = () => {
     id: '103',
     title: '파이리',
     imgUri: testImage,
+    rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      console.log(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    }
   }
 
   return <SealView {...props} />;
 }
 
-const SealView = ({ id, title, imgUri } : SealProps) => {
+const SealView = ({ id, title, imgUri, rotateSeal } : SealProps) => {
   return (
-    <SealBackground>
+    <SealBackground onMouseMove={ rotateSeal }>
       <SealIndexContainer>
         <SealNumber>{ id }</SealNumber>
         <SealTitle>{ title }</SealTitle>
