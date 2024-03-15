@@ -22,7 +22,7 @@ const Footer = () => {
 const FooterView = () => {
   return (
     <FooterContainer>
-      <FooterText>ⓒ 2024. Jiwon Jeong all rights reserved.</FooterText>
+      <FooterText>ⓒ 2024. Jiwon Jeong all rights reserved. Inspired by codingapple.</FooterText>
     </FooterContainer>
   );
 }
