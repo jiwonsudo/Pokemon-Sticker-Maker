@@ -1,8 +1,11 @@
+import { useRef } from "react";
+
 import styled from "styled-components";
 
 import testImage from 'assets/test.png';
 import logo from 'assets/logo.svg';
 import stickerTexture from 'assets/sticker_texture.png';
+import { log } from "console";
 
 const SealContainer = styled.div`
   width: 300px;
@@ -108,26 +111,38 @@ interface SealProps {
   id: string,
   title: string,
   imgUri: string,
+  sealBg: React.RefObject<HTMLDivElement>,
   rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
 }
 
 const Seal = () => {
+  const sealBg = useRef<HTMLDivElement>(null);
+
+  const rotateSeal = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const cursorPosX = event.nativeEvent.offsetX;
+    const cursorPosY = event.nativeEvent.offsetY;
+    const rotateX = 1/10 * cursorPosY - 20;
+    const rotateY = -2/15 * cursorPosX + 20;
+    
+    console.log(sealBg, cursorPosX, cursorPosY);
+    sealBg.current!.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  }
+
   const props = {
     id: '103',
     title: '파이리',
     imgUri: testImage,
-    rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      console.log(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
-    }
+    sealBg: sealBg,
+    rotateSeal: rotateSeal,
   }
 
   return <SealView {...props} />;
 }
 
-const SealView = ({ id, title, imgUri, rotateSeal } : SealProps) => {
+const SealView = ({ id, title, imgUri, sealBg, rotateSeal } : SealProps) => {
   return (
     <SealContainer>
-      <SealBackground>
+      <SealBackground ref={ sealBg }>
         <SealIndexContainer>
           <SealNumber>{ id }</SealNumber>
           <SealTitle>{ title }</SealTitle>
