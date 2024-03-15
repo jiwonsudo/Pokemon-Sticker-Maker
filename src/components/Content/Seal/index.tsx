@@ -5,7 +5,6 @@ import styled from "styled-components";
 import testImage from 'assets/test.png';
 import logo from 'assets/logo.svg';
 import stickerTexture from 'assets/sticker_texture.png';
-import { log } from "console";
 
 const SealContainer = styled.div`
   width: 300px;
@@ -113,6 +112,7 @@ interface SealProps {
   imgUri: string,
   sealBg: React.RefObject<HTMLDivElement>,
   rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
+  resetSeal: () => void,
 }
 
 const Seal = () => {
@@ -123,10 +123,12 @@ const Seal = () => {
     const cursorPosY = event.nativeEvent.offsetY;
     const rotateX = 1/10 * cursorPosY - 20;
     const rotateY = -2/15 * cursorPosX + 20;
-    
-    console.log(sealBg, cursorPosX, cursorPosY);
-    sealBg.current!.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    sealBg.current!.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   }
+
+  const resetSeal = () => {
+    sealBg.current!.style.transform = 'none';
+  };
 
   const props = {
     id: '103',
@@ -134,12 +136,13 @@ const Seal = () => {
     imgUri: testImage,
     sealBg: sealBg,
     rotateSeal: rotateSeal,
+    resetSeal: resetSeal,
   }
 
   return <SealView {...props} />;
 }
 
-const SealView = ({ id, title, imgUri, sealBg, rotateSeal } : SealProps) => {
+const SealView = ({ id, title, imgUri, sealBg, rotateSeal, resetSeal } : SealProps) => {
   return (
     <SealContainer>
       <SealBackground ref={ sealBg }>
@@ -159,7 +162,7 @@ const SealView = ({ id, title, imgUri, sealBg, rotateSeal } : SealProps) => {
           </CreatorTitleContainer>
         </CreatorTitleSection>
       </SealBackground>
-      <SealCover onMouseMove={ rotateSeal }></SealCover>
+      <SealCover onMouseMove={ rotateSeal } onMouseLeave={ resetSeal }></SealCover>
     </SealContainer>
   );
 }
