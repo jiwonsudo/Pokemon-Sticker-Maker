@@ -4,9 +4,15 @@ import testImage from 'assets/test.png';
 import logo from 'assets/logo.svg';
 import stickerTexture from 'assets/sticker_texture.png';
 
-const SealBackground = styled.div`
+const SealContainer = styled.div`
   width: 300px;
   height: 400px;
+  position: relative;
+`;
+
+const SealBackground = styled.div`
+  width: 100%;
+  height: 100%;
   background-color: #f6f3f3;
 `;
 
@@ -89,6 +95,14 @@ const CreatorTitleImage = styled.img.attrs({ src: logo })`
 
 const CreatorTitle = styled.div``;
 
+const SealCover = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  z-index: 3;
+`;
+
 
 interface SealProps {
   id: string,
@@ -112,23 +126,26 @@ const Seal = () => {
 
 const SealView = ({ id, title, imgUri, rotateSeal } : SealProps) => {
   return (
-    <SealBackground onMouseMove={ rotateSeal }>
-      <SealIndexContainer>
-        <SealNumber>{ id }</SealNumber>
-        <SealTitle>{ title }</SealTitle>
-        <CoverTextureImg></CoverTextureImg>
-      </SealIndexContainer>
-      <ImageContainer>
-        <Image src={ imgUri } />
-      </ImageContainer>
-      <CreatorTitleSection>
-        <CreatorTitleContainer>
-          <CreatorTitleImage></CreatorTitleImage>
-          <CreatorTitle>Wonkémon</CreatorTitle>
+    <SealContainer>
+      <SealBackground>
+        <SealIndexContainer>
+          <SealNumber>{ id }</SealNumber>
+          <SealTitle>{ title }</SealTitle>
           <CoverTextureImg></CoverTextureImg>
-        </CreatorTitleContainer>
-      </CreatorTitleSection>
-    </SealBackground>
+        </SealIndexContainer>
+        <ImageContainer>
+          <Image src={ imgUri } />
+        </ImageContainer>
+        <CreatorTitleSection>
+          <CreatorTitleContainer>
+            <CreatorTitleImage></CreatorTitleImage>
+            <CreatorTitle>Wonkémon</CreatorTitle>
+            <CoverTextureImg></CoverTextureImg>
+          </CreatorTitleContainer>
+        </CreatorTitleSection>
+      </SealBackground>
+      <SealCover onMouseMove={ rotateSeal }></SealCover>
+    </SealContainer>
   );
 }
 
