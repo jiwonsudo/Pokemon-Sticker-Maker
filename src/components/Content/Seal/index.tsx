@@ -120,7 +120,7 @@ const GlowEffectCover = styled.div`
   );
   filter: brightness(1) opacity(40%);
   mix-blend-mode: color-dodge;
-  background-size: 500%;
+  background-size: 300%;
   background-position: 100%;
   z-index: 3;
 `;
@@ -147,7 +147,7 @@ const Seal = () => {
     const glowDiv = sealBg.current!.children[3] as HTMLDivElement;
     
     sealDiv.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    glowDiv.style.backgroundPosition = `${cursorPosX/5 + cursorPosY/5}%`;
+    glowDiv.style.backgroundPosition = `${cursorPosX/4 + cursorPosY/4}%`;
     
   }
 
