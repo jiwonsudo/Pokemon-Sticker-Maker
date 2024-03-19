@@ -3,6 +3,11 @@ import styled from "styled-components";
 import Button from "./Button";
 import Label from "./Label";
 import TextField from "./TextField";
+import ButtonIcon from "./ButtonIcon";
+
+import picIcon from 'assets/upload.svg';
+import genIcon from 'assets/sticker.svg';
+import downIcon from 'assets/download.svg';
 
 const ControlsContainer = styled.div`
   width: 300px;
@@ -21,6 +26,9 @@ interface ControllerProps {
   picBtnProps: { [key: string]: string },
   genBtnProps: { [key: string]: string },
   downBtnProps: { [key: string]: string },
+  picIcon: string,
+  genIcon: string,
+  downIcon: string,
 }
 
 const Controller = () => {
@@ -33,23 +41,26 @@ const Controller = () => {
       $activeColor: '#171d14',
     },
     genBtnProps: {
-      $bgColor: '#e5710c',
-      $color: '#361b02',
-      $activeBgColor: '#8b4507',
-      $activeColor: '#090400',
+      $bgColor: '#f0780e',
+      $color: '#572d06',
+      $activeBgColor: '#a85309',
+      $activeColor: '#170b01',
     },
     downBtnProps: {
-      $bgColor: '#0c66e5',
+      $bgColor: '#0e7deb',
       $color: '#03214b',
-      $activeBgColor: '#063e8b',
+      $activeBgColor: '#0848a3',
       $activeColor: '#01070f',
     },
+    picIcon: picIcon,
+    genIcon: genIcon,
+    downIcon: downIcon,
   };
 
   return <ControllerView {...props} />;
 };
 
-const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps } : ControllerProps) => {
+const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, picIcon, genIcon, downIcon } : ControllerProps) => {
   return (
     <ControlsContainer>
       <LineContainer>
@@ -61,11 +72,18 @@ const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps } : ControllerP
         <TextField></TextField>
       </LineContainer>
       <LineContainer>
-        <Button { ...picBtnProps }>사진 업로드</Button>
-        <Button { ...genBtnProps }>띠부씰 생성</Button>
+        <Button { ...picBtnProps }>
+          <ButtonIcon src={ picIcon }/>
+          사진 업로드
+        </Button>
+        <Button { ...genBtnProps }>
+          <ButtonIcon src={ genIcon }/>
+          띠부씰 생성
+        </Button>
       </LineContainer>
       <LineContainer $align="center">
         <Button  { ...downBtnProps }>
+          <ButtonIcon src={ downIcon }/>
           띠부씰 저장하기
         </Button>
       </LineContainer>

@@ -14,6 +14,8 @@ const Button = styled.button<ButtonProps>`
   font-size: 14px;
   font-family: Galmuri11;
   border: none;
+  display: flex;
+  align-items: center;
   color: ${ props => props.$color ? props.$color : '#222224' };
   background-color: ${ props => props.$bgColor ? props.$bgColor : '#f0f0f0' };
   clip-path: polygon(
