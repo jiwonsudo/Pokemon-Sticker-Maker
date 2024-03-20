@@ -1,5 +1,5 @@
 import Header from "./Header";
-import Content from "./Content";
+import Main from "./Contents";
 import Footer from "./Footer";
 
-export { Header, Content, Footer };
+export { Header, Main, Footer };

@@ -1,10 +1,10 @@
-import { Header, Content, Footer } from "./components";
+import { Header, Main, Footer } from "./components";
 
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Content></Content>
+      <Main></Main>
       <Footer></Footer>
     </div>
   );

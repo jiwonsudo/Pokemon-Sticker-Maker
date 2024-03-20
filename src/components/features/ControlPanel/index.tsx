@@ -1,26 +1,13 @@
-import styled from "styled-components";
-
 import Button from "./Button";
 import Label from "./Label";
 import TextField from "./TextField";
 import ButtonIcon from "./ButtonIcon";
+import LineContainer from "./LineContainer";
+import ControlsContainer from "./ControlsContainer";
 
 import picIcon from 'assets/upload.svg';
 import genIcon from 'assets/sticker.svg';
 import downIcon from 'assets/download.svg';
-
-const ControlsContainer = styled.div`
-  width: 300px;
-  margin-top: 40px;
-`;
-
-const LineContainer = styled.div<{ $align?: string}>`
-  width: 100%;
-  margin: 5px 0;
-  display: flex;
-  justify-content: ${ props => props.$align ? props.$align : 'space-between'};
-  align-items: center;
-`;
 
 interface ControllerProps {
   picBtnProps: { [key: string]: string },
