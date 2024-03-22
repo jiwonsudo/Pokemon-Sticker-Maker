@@ -1,4 +1,5 @@
-import { useRef } from "react";
+import React from "react";
+import { useRef, useCallback } from "react";
 
 import SealContainer from "./SealContainer";
 import CreatorTitle from "./CreatorTitle";
@@ -29,7 +30,7 @@ interface SealProps {
 const Seal = () => {
   const sealBg = useRef<HTMLDivElement>(null);
 
-  const rotateSeal = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;
     const cursorPosY = event.nativeEvent.offsetY;
     const rotateX = 1/10 * cursorPosY - 20;
@@ -40,14 +41,14 @@ const Seal = () => {
     sealDiv.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     glowDiv.style.backgroundPosition = `${cursorPosX/4 + cursorPosY/4}%`;
     
-  }
+  }, []);
 
-  const resetSeal = () => {
+  const resetSeal = useCallback(() => {
     const sealDiv: HTMLDivElement = sealBg.current!;
     const glowDiv = sealBg.current!.children[3] as HTMLDivElement;
     sealDiv.style.transform = 'none';
     glowDiv.style.backgroundPosition = '100%';
-  };
+  }, []);
 
   const props = {
     id: '103',
@@ -61,7 +62,7 @@ const Seal = () => {
   return <SealView {...props} />;
 }
 
-const SealView = ({ id, title, imgUri, sealBg, rotateSeal, resetSeal } : SealProps) => {
+const SealView = React.memo(({ id, title, imgUri, sealBg, rotateSeal, resetSeal } : SealProps) => {
   return (
     <SealContainer>
       <SealBackground ref={ sealBg }>
@@ -85,6 +86,6 @@ const SealView = ({ id, title, imgUri, sealBg, rotateSeal, resetSeal } : SealPro
       <SealCover onMouseMove={ rotateSeal } onMouseLeave={ resetSeal }></SealCover>
     </SealContainer>
   );
-}
+});
 
 export default Seal;
