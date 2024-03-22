@@ -4,6 +4,10 @@ import MainWrapper from './features/ContentsWrapper/MainWrapper';
 import ControlPanel from './features/ControlPanel';
 
 const Content = () => {
+  return <ContentView/>;
+}
+
+const ContentView = () => {
   return (
     <SealSection>
       <MainWrapper>
