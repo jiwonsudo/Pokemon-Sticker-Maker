@@ -1,4 +1,4 @@
-import Seal from './features/SealView';
+import Seal from './features/Seal';
 import SealSection from './features/ContentsWrapper/SealSection';
 import MainWrapper from './features/ContentsWrapper/MainWrapper';
 import ControlPanel from './features/ControlPanel';
