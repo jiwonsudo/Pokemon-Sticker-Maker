@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 import SealContainer from "./SealContainer";
 import CreatorTitle from "./CreatorTitle";
@@ -16,7 +16,7 @@ import SealTitle from "./SealTitle";
 import Image from "./Image";
 import CoverTextureImage from "./CoverTextureImage";
 
-import testImage from 'assets/test.png';
+import defaultImg from 'assets/default.png';
 
 interface SealProps {
   id: string,
@@ -29,6 +29,9 @@ interface SealProps {
 
 const Seal = () => {
   const sealBg = useRef<HTMLDivElement>(null);
+  const [sealId, setSealId] = useState('0501');
+  const [sealTitle, setSealTitle] = useState('수댕이');
+  const [sealImg, setSealImg] = useState(defaultImg);
 
   const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;
@@ -51,9 +54,9 @@ const Seal = () => {
   }, []);
 
   const props = {
-    id: '103',
-    title: '파이리',
-    imgUri: testImage,
+    id: sealId,
+    title: sealTitle,
+    imgUri: sealImg,
     sealBg: sealBg,
     rotateSeal: rotateSeal,
     resetSeal: resetSeal,
