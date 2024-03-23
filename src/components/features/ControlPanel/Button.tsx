@@ -13,6 +13,7 @@ const Button = styled.button<ButtonProps>`
   line-height: 0;
   font-size: 14px;
   font-family: Galmuri11;
+  position: relative;
   border: none;
   display: flex;
   align-items: center;
