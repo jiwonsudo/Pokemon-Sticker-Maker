@@ -22,6 +22,7 @@ interface SealProps {
   id: string,
   title: string,
   imgUri: string,
+  sealNumColor: string,
   sealBg: React.RefObject<HTMLDivElement>,
   rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
   resetSeal: () => void,
@@ -57,6 +58,7 @@ const Seal = () => {
     id: sealId,
     title: sealTitle,
     imgUri: sealImg,
+    sealNumColor: '#9DD6F9',
     sealBg: sealBg,
     rotateSeal: rotateSeal,
     resetSeal: resetSeal,
@@ -65,12 +67,12 @@ const Seal = () => {
   return <SealView {...props} />;
 }
 
-const SealView = React.memo(({ id, title, imgUri, sealBg, rotateSeal, resetSeal } : SealProps) => {
+const SealView = React.memo(({ id, title, imgUri, sealNumColor, sealBg, rotateSeal, resetSeal } : SealProps) => {
   return (
     <SealContainer>
       <SealBackground ref={ sealBg }>
         <SealIndexContainer>
-          <SealNumber>{ id }</SealNumber>
+          <SealNumber $bgColor={ sealNumColor }>{ id }</SealNumber>
           <SealTitle>{ title }</SealTitle>
           <CoverTextureImage></CoverTextureImage>
         </SealIndexContainer>
