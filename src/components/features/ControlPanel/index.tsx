@@ -8,17 +8,26 @@ import ControlsContainer from "./ControlsContainer";
 import picIcon from 'assets/upload.svg';
 import genIcon from 'assets/sticker.svg';
 import downIcon from 'assets/download.svg';
+import ImageInput from "./ImageInput";
 
 interface ControllerProps {
   picBtnProps: { [key: string]: string },
   genBtnProps: { [key: string]: string },
   downBtnProps: { [key: string]: string },
+  onUploadImg: (event: React.FormEvent<HTMLInputElement>) => void,
+  onGenerate: () => void,
+  onDownloadSeal: () => void,
   picIcon: string,
   genIcon: string,
   downIcon: string,
 }
 
 const Controller = () => {
+  const onUploadImg = (event: React.FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement;
+    const newImage = input.value;
+    alert(`File Selected: ${newImage}`);
+  }
 
   const props: ControllerProps = {
     picBtnProps: {
@@ -39,6 +48,9 @@ const Controller = () => {
       $activeBgColor: '#0848a3',
       $activeColor: '#01070f',
     },
+    onUploadImg: onUploadImg,
+    onGenerate: () => {},
+    onDownloadSeal: () => {},
     picIcon: picIcon,
     genIcon: genIcon,
     downIcon: downIcon,
@@ -47,7 +59,7 @@ const Controller = () => {
   return <ControllerView {...props} />;
 };
 
-const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, picIcon, genIcon, downIcon } : ControllerProps) => {
+const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, onUploadImg, onGenerate, onDownloadSeal, picIcon, genIcon, downIcon } : ControllerProps) => {
   return (
     <ControlsContainer>
       <LineContainer>
@@ -61,6 +73,7 @@ const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, picIcon, genIc
       <LineContainer>
         <Button { ...picBtnProps }>
           <ButtonIcon src={ picIcon }/>
+          <ImageInput onChange={ onUploadImg }></ImageInput>
           사진 업로드
         </Button>
         <Button { ...genBtnProps }>
