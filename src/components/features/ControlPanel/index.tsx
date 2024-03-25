@@ -1,9 +1,13 @@
+import React, { useCallback, useRef } from "react";
+
 import Button from "./Button";
 import Label from "./Label";
 import TextField from "./TextField";
 import ButtonIcon from "./ButtonIcon";
 import LineContainer from "./LineContainer";
 import ControlsContainer from "./ControlsContainer";
+
+import { ContentProps } from "components/Contents";
 
 import picIcon from 'assets/upload.svg';
 import genIcon from 'assets/sticker.svg';
@@ -14,6 +18,8 @@ interface ControllerProps {
   picBtnProps: { [key: string]: string },
   genBtnProps: { [key: string]: string },
   downBtnProps: { [key: string]: string },
+  tfId: React.RefObject<HTMLInputElement>,
+  tfName: React.RefObject<HTMLInputElement>,
   onUploadImg: (event: React.FormEvent<HTMLInputElement>) => void,
   onGenerate: () => void,
   onDownloadSeal: () => void,
@@ -22,12 +28,27 @@ interface ControllerProps {
   downIcon: string,
 }
 
-const Controller = () => {
-  const onUploadImg = (event: React.FormEvent<HTMLInputElement>) => {
+const Controller = ({ getSealInfo }: ContentProps) => {
+  const uploadedImgUri = useRef<string>('');
+
+  const tfId = useRef<HTMLInputElement>(null);
+  const tfName = useRef<HTMLInputElement>(null);
+
+  const onUploadImg = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-    const newImage = input.value;
-    alert(`File Selected: ${newImage}`);
-  }
+    const newImageUri = input.value;
+    uploadedImgUri.current = newImageUri;
+  }, []);
+
+  const onGenerate = useCallback(() => {
+    let tfIdValue = tfId.current!.value;
+    let tfNameValue = tfName.current!.value;
+
+    if (!tfIdValue || tfIdValue.replaceAll(' ', '') === '') tfIdValue = '0501';
+    if (!tfNameValue || tfNameValue.replaceAll(' ', '') === '') tfNameValue = '수댕이';
+
+    getSealInfo(tfIdValue, tfNameValue, uploadedImgUri.current);
+  }, [])
 
   const props: ControllerProps = {
     picBtnProps: {
@@ -48,8 +69,10 @@ const Controller = () => {
       $activeBgColor: '#0848a3',
       $activeColor: '#01070f',
     },
+    tfId: tfId,
+    tfName: tfName,
     onUploadImg: onUploadImg,
-    onGenerate: () => {},
+    onGenerate: onGenerate,
     onDownloadSeal: () => {},
     picIcon: picIcon,
     genIcon: genIcon,
@@ -59,16 +82,16 @@ const Controller = () => {
   return <ControllerView {...props} />;
 };
 
-const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, onUploadImg, onGenerate, onDownloadSeal, picIcon, genIcon, downIcon } : ControllerProps) => {
+const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, tfId, tfName, onUploadImg, onGenerate, onDownloadSeal, picIcon, genIcon, downIcon } : ControllerProps) => {
   return (
     <ControlsContainer>
       <LineContainer>
         <Label>도감번호</Label>
-        <TextField></TextField>
+        <TextField ref={ tfId }></TextField>
       </LineContainer>
       <LineContainer>
         <Label>이름</Label>
-        <TextField></TextField>
+        <TextField ref={ tfName }></TextField>
       </LineContainer>
       <LineContainer>
         <Button { ...picBtnProps }>
@@ -76,13 +99,13 @@ const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, onUploadImg, o
           <ImageInput onChange={ onUploadImg }></ImageInput>
           사진 업로드
         </Button>
-        <Button { ...genBtnProps }>
+        <Button onClick={ onGenerate } { ...genBtnProps }>
           <ButtonIcon src={ genIcon }/>
           띠부씰 생성
         </Button>
       </LineContainer>
       <LineContainer $align="center">
-        <Button  { ...downBtnProps }>
+        <Button onClick={ onDownloadSeal } { ...downBtnProps }>
           <ButtonIcon src={ downIcon }/>
           띠부씰 저장하기
         </Button>
