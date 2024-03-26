@@ -34,15 +34,24 @@ const Seal = ({ sealInfo }: ContentProps) => {
   const sealBg = useRef<HTMLDivElement>(null);
   const [sealId, setSealId] = useState('');
   const [sealName, setSealName] = useState('');
-  const [sealImgUri, setSealImgUri] = useState('');
+  const [sealImg, setSealImg] = useState<string>('');
 
   useEffect(() => {
-    setSealId(sealInfo![0]);
-    setSealName(sealInfo![1]);
-    if (sealInfo![2] === '') {
-      setSealImgUri(defaultImg);
-    } else setSealImgUri(sealInfo![2]);
-  }, [sealInfo, sealId, sealName, sealImgUri]);
+    const sealData = sealInfo!
+
+    setSealId(String(sealData[0]));
+    setSealName(String(sealData[1]));
+
+    if (sealData[2] instanceof File) {
+      const fileReader = new FileReader;
+      const imgFile = sealData[2];
+
+      fileReader.onload = () => {
+        setSealImg(String(fileReader.result));
+      }
+      fileReader.readAsDataURL(imgFile);
+    } else setSealImg(defaultImg);
+  }, [sealInfo, sealId, sealName, sealImg]);
 
   const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;
@@ -67,7 +76,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
   const props = {
     id: sealId,
     title: sealName,
-    imgUri: sealImgUri,
+    imgUri: sealImg,
     sealNumColor: '#9DD6F9',
     sealBg: sealBg,
     rotateSeal: rotateSeal,

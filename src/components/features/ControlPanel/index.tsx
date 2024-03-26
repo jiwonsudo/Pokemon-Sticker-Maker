@@ -14,6 +14,8 @@ import genIcon from 'assets/sticker.svg';
 import downIcon from 'assets/download.svg';
 import ImageInput from "./ImageInput";
 
+import defaultImg from 'assets/default.png';
+
 interface ControllerProps {
   picBtnProps: { [key: string]: string },
   genBtnProps: { [key: string]: string },
@@ -29,15 +31,19 @@ interface ControllerProps {
 }
 
 const Controller = ({ updateSeal }: ContentProps) => {
-  const uploadedImgUri = useRef<string>('');
+  const uploadedImgUri = useRef<File | string>(defaultImg);
 
   const tfId = useRef<HTMLInputElement>(null);
   const tfName = useRef<HTMLInputElement>(null);
 
   const onUploadImg = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-    const newImageUri = input.value;
-    uploadedImgUri.current = newImageUri;
+    const newImageUri = input.files?.[0];
+    if (newImageUri) {
+      uploadedImgUri.current = newImageUri;
+    } else {
+      uploadedImgUri.current = defaultImg;
+    }
   }, []);
 
   const onGenerate = useCallback(() => {
