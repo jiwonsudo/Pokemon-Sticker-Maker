@@ -28,7 +28,7 @@ interface ControllerProps {
   downIcon: string,
 }
 
-const Controller = ({ getSealInfo }: ContentProps) => {
+const Controller = ({ updateSeal }: ContentProps) => {
   const uploadedImgUri = useRef<string>('');
 
   const tfId = useRef<HTMLInputElement>(null);
@@ -47,7 +47,7 @@ const Controller = ({ getSealInfo }: ContentProps) => {
     if (!tfIdValue || tfIdValue.replaceAll(' ', '') === '') tfIdValue = '0501';
     if (!tfNameValue || tfNameValue.replaceAll(' ', '') === '') tfNameValue = '수댕이';
 
-    getSealInfo(tfIdValue, tfNameValue, uploadedImgUri.current);
+    updateSeal(tfIdValue, tfNameValue, uploadedImgUri.current);
   }, [])
 
   const props: ControllerProps = {
