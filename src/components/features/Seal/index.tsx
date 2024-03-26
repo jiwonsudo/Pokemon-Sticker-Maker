@@ -43,7 +43,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
     setSealName(String(sealData[1]));
 
     if (sealData[2] instanceof File) {
-      const fileReader = new FileReader;
+      const fileReader = new FileReader();
       const imgFile = sealData[2];
 
       fileReader.onload = () => {
