@@ -88,7 +88,7 @@ const Controller = ({ updateSeal }: ContentProps) => {
   return <ControllerView {...props} />;
 };
 
-const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, tfId, tfName, onUploadImg, onGenerate, onDownloadSeal, picIcon, genIcon, downIcon } : ControllerProps) => {
+const ControllerView = React.memo(({ picBtnProps, genBtnProps, downBtnProps, tfId, tfName, onUploadImg, onGenerate, onDownloadSeal, picIcon, genIcon, downIcon } : ControllerProps) => {
   return (
     <ControlsContainer>
       <LineContainer>
@@ -118,6 +118,6 @@ const ControllerView = ({ picBtnProps, genBtnProps, downBtnProps, tfId, tfName, 
       </LineContainer>
     </ControlsContainer>
   );
-}
+});
 
 export default Controller;
