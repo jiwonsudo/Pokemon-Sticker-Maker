@@ -1,30 +1,36 @@
+import { useState } from 'react';
+
 import Seal from './features/Seal';
 import SealSection from './features/ContentsWrapper/SealSection';
 import MainWrapper from './features/ContentsWrapper/MainWrapper';
 import ControlPanel from './features/ControlPanel';
 
 interface ContentProps {
-  getSealInfo: (id: string, name: string, imgUri: string) => void,
-
+  updateSeal?: (id: string, name: string, imgUri: string) => void,
+  sealInfo?: Array<string>,
 }
 
 const Content = () => {
+  const [currSealInfo, setCurrSealInfo] = useState<Array<string>>(['0501', '수댕이', '']);
+
+  const updateSeal = (id: string, name: string, imgUri: string) => {
+    setCurrSealInfo([id, name, imgUri]);
+  }
 
   const props: ContentProps = {
-    getSealInfo: (id: string, name: string, imgUri: string) => {
-      // TODO: write func to create(draw) Seal with above params
-    }
+    updateSeal: updateSeal,
+    sealInfo: currSealInfo,
   };
 
   return <ContentView {...props}/>;
 }
 
-const ContentView = ({ getSealInfo }: ContentProps) => {
+const ContentView = ({ updateSeal, sealInfo }: ContentProps) => {
   return (
     <SealSection>
       <MainWrapper>
-        <Seal></Seal>
-        <ControlPanel getSealInfo={ getSealInfo }></ControlPanel>
+        <Seal sealInfo={ sealInfo }></Seal>
+        <ControlPanel updateSeal={ updateSeal }></ControlPanel>
       </MainWrapper>
     </SealSection>
   );
