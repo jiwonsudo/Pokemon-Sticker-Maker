@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Seal from './features/Seal';
 import SealSection from './features/ContentsWrapper/SealSection';
 import MainWrapper from './features/ContentsWrapper/MainWrapper';
-import ControlPanel from './features/ControlPanel';
+import Controls from './features/Controls';
 
 interface ContentProps {
   updateSeal?: (id: string, name: string, imgUri: File | string) => void,
@@ -30,7 +30,7 @@ const ContentView = ({ updateSeal, sealInfo }: ContentProps) => {
     <SealSection>
       <MainWrapper>
         <Seal sealInfo={ sealInfo }></Seal>
-        <ControlPanel updateSeal={ updateSeal }></ControlPanel>
+        <Controls updateSeal={ updateSeal }></Controls>
       </MainWrapper>
     </SealSection>
   );
