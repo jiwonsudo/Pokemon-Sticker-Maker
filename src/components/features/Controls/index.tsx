@@ -1,18 +1,18 @@
 import React, { useCallback, useRef } from "react";
 
-import Button from "./Button";
-import Label from "./Label";
-import TextField from "./TextField";
-import ButtonIcon from "./ButtonIcon";
-import LineContainer from "./LineContainer";
-import ControlsContainer from "./ControlsContainer";
+import Button from "./ChildComponents/Button";
+import Label from "./ChildComponents/Label";
+import TextField from "./ChildComponents/TextField";
+import ButtonIcon from "./ChildComponents/ButtonIcon";
+import LineContainer from "./ChildComponents/LineContainer";
+import ControlsContainer from "./ChildComponents/ControlsContainer";
 
 import { ContentProps } from "components/Contents";
 
 import picIcon from 'assets/upload.svg';
 import genIcon from 'assets/sticker.svg';
 import downIcon from 'assets/download.svg';
-import ImageInput from "./ImageInput";
+import ImageInput from "./ChildComponents/ImageInput";
 
 import defaultImg from 'assets/default.png';
 

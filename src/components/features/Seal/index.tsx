@@ -1,20 +1,20 @@
 import React, { useEffect } from "react";
 import { useState, useRef, useCallback } from "react";
 
-import SealContainer from "./SealContainer";
-import CreatorTitle from "./CreatorTitle";
-import CreatorTitleContainer from "./CreatorTitleContainer";
-import CreatorTitleImage from "./CreatorTitleImage";
-import CreatorTitleSection from "./CreatorTitleSection";
-import GlowEffectCover from "./GlowEffectCover";
-import ImageContainer from "./ImageContainer";
-import SealBackground from "./SealBackground";
-import SealCover from "./SealCover";
-import SealIndexContainer from "./SealIndexContainer";
-import SealNumber from "./SealNumber";
-import SealTitle from "./SealTitle";
-import Image from "./Image";
-import CoverTextureImage from "./CoverTextureImage";
+import SealContainer from "./ChildComponents/SealContainer";
+import CreatorTitle from "./ChildComponents/CreatorTitle";
+import CreatorTitleContainer from "./ChildComponents/CreatorTitleContainer";
+import CreatorTitleImage from "./ChildComponents/CreatorTitleImage";
+import CreatorTitleSection from "./ChildComponents/CreatorTitleSection";
+import GlowEffectCover from "./ChildComponents/GlowEffectCover";
+import ImageContainer from "./ChildComponents/ImageContainer";
+import SealBackground from "./ChildComponents/SealBackground";
+import SealCover from "./ChildComponents/SealCover";
+import SealIndexContainer from "./ChildComponents/SealIndexContainer";
+import SealNumber from "./ChildComponents/SealNumber";
+import SealTitle from "./ChildComponents/SealTitle";
+import Image from "./ChildComponents/Image";
+import CoverTextureImage from "./ChildComponents/CoverTextureImage";
 
 import { ContentProps } from "components/Contents";
 
