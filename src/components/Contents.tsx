@@ -6,15 +6,15 @@ import MainWrapper from './features/ContentsWrapper/MainWrapper';
 import Controls from './features/Controls';
 
 interface ContentProps {
-  updateSeal?: (id: string, name: string, imgUri: File | string) => void,
+  updateSeal?: (id: string, name: string, img: File | string) => void,
   sealInfo?: Array<string | File>,
 }
 
 const Content = () => {
   const [currSealInfo, setCurrSealInfo] = useState<Array<string | File>>(['0501', '수댕이', '']);
 
-  const updateSeal = (id: string, name: string, imgUri: File | string) => {
-    setCurrSealInfo([id, name, imgUri]);
+  const updateSeal = (id: string, name: string, img: File | string) => {
+    setCurrSealInfo([id, name, img]);
   }
 
   const props: ContentProps = {

@@ -31,18 +31,18 @@ interface ControllerProps {
 }
 
 const Controller = ({ updateSeal }: ContentProps) => {
-  const uploadedImgUri = useRef<File | string>(defaultImg);
+  const selectedImg = useRef<File | string>(defaultImg);
 
   const tfId = useRef<HTMLInputElement>(null);
   const tfName = useRef<HTMLInputElement>(null);
 
   const onUploadImg = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
-    const newImageUri = input.files?.[0];
-    if (newImageUri) {
-      uploadedImgUri.current = newImageUri;
+    const newImgFile = input.files?.[0];
+    if (newImgFile) {
+      selectedImg.current = newImgFile;
     } else {
-      uploadedImgUri.current = defaultImg;
+      selectedImg.current = defaultImg;
     }
   }, []);
 
@@ -53,7 +53,7 @@ const Controller = ({ updateSeal }: ContentProps) => {
     if (!tfIdValue || tfIdValue.replaceAll(' ', '') === '') tfIdValue = '0501';
     if (!tfNameValue || tfNameValue.replaceAll(' ', '') === '') tfNameValue = '수댕이';
 
-    updateSeal!(tfIdValue, tfNameValue, uploadedImgUri.current);
+    updateSeal!(tfIdValue, tfNameValue, selectedImg.current);
   }, [updateSeal]);
 
   const props: ControllerProps = {
