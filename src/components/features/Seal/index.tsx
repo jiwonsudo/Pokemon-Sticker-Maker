@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useState, useRef, useCallback } from "react";
 
+import removeBackground from "@imgly/background-removal";
+
 import SealContainer from "./ChildComponents/SealContainer";
 import CreatorTitle from "./ChildComponents/CreatorTitle";
 import CreatorTitleContainer from "./ChildComponents/CreatorTitleContainer";
@@ -44,12 +46,15 @@ const Seal = ({ sealInfo }: ContentProps) => {
 
     if (sealData[2] instanceof File) {
       const fileReader = new FileReader();
-      const imgFile = sealData[2];
 
-      fileReader.onload = () => {
-        setSealImgUrl(String(fileReader.result));
+      fileReader.onload = async () => {
+        const imgUrl = String(fileReader.result);
+        const bgRemovedImg: Blob = await removeBackground(imgUrl);
+        setSealImgUrl(URL.createObjectURL(bgRemovedImg));
       }
-      fileReader.readAsDataURL(imgFile);
+
+      fileReader.readAsDataURL(sealData[2]);
+      
     } else setSealImgUrl(defaultImg);
   }, [sealInfo, sealId, sealName, sealImgUrl]);
 
