@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 
-import removeBackground from "@imgly/background-removal";
+import removeBackground, { Config } from "@imgly/background-removal";
 
 import SealContainer from "./ChildComponents/SealContainer";
 import CreatorTitle from "./ChildComponents/CreatorTitle";
@@ -25,7 +24,7 @@ import defaultImg from 'assets/default.png';
 interface SealProps {
   id: string,
   title: string,
-  imgUri: string,
+  imgUrl: string,
   sealNumColor: string,
   sealBg: React.RefObject<HTMLDivElement>,
   rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
@@ -40,21 +39,23 @@ const Seal = ({ sealInfo }: ContentProps) => {
 
   useEffect(() => {
     const sealData = sealInfo!
+    let config: Config = {
+      progress: (key, current, total) => {
+        console.log(`${key.replace(':', ': ')}: ${current} of ${total}`);
+      }
+    };
 
     setSealId(String(sealData[0]));
     setSealName(String(sealData[1]));
 
     if (sealData[2] instanceof File) {
       const fileReader = new FileReader();
-
       fileReader.onload = async () => {
         const imgUrl = String(fileReader.result);
-        const bgRemovedImg: Blob = await removeBackground(imgUrl);
+        const bgRemovedImg: Blob = await removeBackground(imgUrl, config);
         setSealImgUrl(URL.createObjectURL(bgRemovedImg));
       }
-
       fileReader.readAsDataURL(sealData[2]);
-      
     } else setSealImgUrl(defaultImg);
   }, [sealInfo, sealId, sealName, sealImgUrl]);
 
@@ -81,7 +82,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
   const props = {
     id: sealId,
     title: sealName,
-    imgUri: sealImgUrl,
+    imgUrl: sealImgUrl,
     sealNumColor: '#9DD6F9',
     sealBg: sealBg,
     rotateSeal: rotateSeal,
@@ -91,7 +92,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
   return <SealView {...props} />;
 }
 
-const SealView = React.memo(({ id, title, imgUri, sealNumColor, sealBg, rotateSeal, resetSeal } : SealProps) => {
+const SealView = React.memo(({ id, title, imgUrl, sealNumColor, sealBg, rotateSeal, resetSeal } : SealProps) => {
   return (
     <SealContainer>
       <SealBackground ref={ sealBg }>
@@ -101,7 +102,7 @@ const SealView = React.memo(({ id, title, imgUri, sealNumColor, sealBg, rotateSe
           <CoverTextureImage></CoverTextureImage>
         </SealIndexContainer>
         <ImageContainer>
-          <Image src={ imgUri } />
+          <Image src={ imgUrl } />
         </ImageContainer>
         <CreatorTitleSection>
           <CreatorTitleContainer>
