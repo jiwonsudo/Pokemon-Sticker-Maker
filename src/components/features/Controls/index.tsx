@@ -36,7 +36,7 @@ const Controller = ({ updateSeal }: ContentProps) => {
   const tfId = useRef<HTMLInputElement>(null);
   const tfName = useRef<HTMLInputElement>(null);
 
-  const onUploadImg = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+  const onUploadImg = (event: React.FormEvent<HTMLInputElement>) => {
     const input = event.target as HTMLInputElement;
     const newImgFile = input.files?.[0];
     if (newImgFile) {
@@ -44,7 +44,7 @@ const Controller = ({ updateSeal }: ContentProps) => {
     } else {
       selectedImg.current = defaultImg;
     }
-  }, []);
+  };
 
   const onGenerate = useCallback(() => {
     let tfIdValue = tfId.current!.value;
