@@ -39,6 +39,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
 
   useEffect(() => {
     const sealData = sealInfo!
+
     let config: Config = {
       progress: (key, current, total) => {
         console.log(`${key.replace(':', ': ')}: ${current} of ${total}`);
@@ -57,7 +58,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
       }
       fileReader.readAsDataURL(sealData[2]);
     } else setSealImgUrl(defaultImg);
-  }, [sealInfo, sealId, sealName, sealImgUrl]);
+  }, [sealInfo]);
 
   const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;
