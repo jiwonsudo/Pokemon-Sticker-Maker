@@ -80,11 +80,18 @@ const Seal = ({ sealInfo }: ContentProps) => {
     glowDiv.style.backgroundPosition = '100%';
   }, []);
 
+  const sealNumColorPicker = useCallback(() => {
+    const colorArr: Array<string> = ['#9DD6F9', '#a5f99d', '#f9f79d', '#f9ba9d', '#f9a29d', '#9da8f9', '#e09df9'];
+    const min = Math.ceil(0);
+    const max = Math.floor(colorArr.length);
+    return colorArr[Math.floor(Math.random() * (max - min + 1)) + min];
+  }, []);
+
   const props = {
     id: sealId,
     title: sealName,
     imgUrl: sealImgUrl,
-    sealNumColor: '#9DD6F9',
+    sealNumColor: sealNumColorPicker(),
     sealBg: sealBg,
     rotateSeal: rotateSeal,
     resetSeal: resetSeal,
