@@ -12,10 +12,11 @@ import ImageContainer from "./ChildComponents/ImageContainer";
 import SealBackground from "./ChildComponents/SealBackground";
 import SealCover from "./ChildComponents/SealCover";
 import SealIndexContainer from "./ChildComponents/SealIndexContainer";
-import SealNumber from "./ChildComponents/SealNumber";
+import SealNumberLabel from "./ChildComponents/SealNumberLabel";
 import SealTitle from "./ChildComponents/SealTitle";
 import Image from "./ChildComponents/Image";
 import CoverTextureImage from "./ChildComponents/CoverTextureImage";
+import Spinner from "./ChildComponents/Preloader";
 
 import { ContentProps } from "components/Contents";
 
@@ -29,6 +30,7 @@ interface SealProps {
   sealBg: React.RefObject<HTMLDivElement>,
   rotateSeal: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
   resetSeal: () => void,
+  isLoading: boolean,
 }
 
 const Seal = ({ sealInfo }: ContentProps) => {
@@ -36,13 +38,17 @@ const Seal = ({ sealInfo }: ContentProps) => {
   const [sealId, setSealId] = useState('');
   const [sealName, setSealName] = useState('');
   const [sealImgUrl, setSealImgUrl] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const sealData = sealInfo!
 
     let config: Config = {
       progress: (key, current, total) => {
-        console.log(`${key.replace(':', ': ')}: ${current} of ${total}`);
+        console.log(`${key}: ${current} of ${total}`);
+        if (key === 'compute:inference' && current === 1) {
+          setIsLoading(false);
+        }
       }
     };
 
@@ -50,6 +56,7 @@ const Seal = ({ sealInfo }: ContentProps) => {
     setSealName(String(sealData[1]));
 
     if (sealData[2] instanceof File) {
+      setIsLoading(true);
       const fileReader = new FileReader();
       fileReader.onload = async () => {
         const imgUrl = String(fileReader.result);
@@ -95,34 +102,38 @@ const Seal = ({ sealInfo }: ContentProps) => {
     sealBg: sealBg,
     rotateSeal: rotateSeal,
     resetSeal: resetSeal,
+    isLoading: isLoading,
   }
 
   return <SealView {...props} />;
 }
 
-const SealView = React.memo(({ id, title, imgUrl, sealNumColor, sealBg, rotateSeal, resetSeal } : SealProps) => {
+const SealView = React.memo(({ id, title, imgUrl, sealNumColor, sealBg, rotateSeal, resetSeal, isLoading } : SealProps) => {
   return (
-    <SealContainer>
-      <SealBackground ref={ sealBg }>
-        <SealIndexContainer>
-          <SealNumber $bgColor={ sealNumColor }>{ id }</SealNumber>
-          <SealTitle>{ title }</SealTitle>
-          <CoverTextureImage></CoverTextureImage>
-        </SealIndexContainer>
-        <ImageContainer>
-          <Image src={ imgUrl } />
-        </ImageContainer>
-        <CreatorTitleSection>
-          <CreatorTitleContainer>
-            <CreatorTitleImage></CreatorTitleImage>
-            <CreatorTitle>Wonkémon</CreatorTitle>
+    <>
+      { isLoading ? <Spinner/> : null}
+      <SealContainer>
+        <SealBackground ref={ sealBg }>
+          <SealIndexContainer>
+            <SealNumberLabel $bgColor={ sealNumColor }>{ id }</SealNumberLabel>
+            <SealTitle>{ title }</SealTitle>
             <CoverTextureImage></CoverTextureImage>
-          </CreatorTitleContainer>
-        </CreatorTitleSection>
-        <GlowEffectCover></GlowEffectCover>
-      </SealBackground>
-      <SealCover onMouseMove={ rotateSeal } onMouseLeave={ resetSeal }></SealCover>
-    </SealContainer>
+          </SealIndexContainer>
+          <ImageContainer>
+            <Image src={ imgUrl } />
+          </ImageContainer>
+          <CreatorTitleSection>
+            <CreatorTitleContainer>
+              <CreatorTitleImage></CreatorTitleImage>
+              <CreatorTitle>Wonkémon</CreatorTitle>
+              <CoverTextureImage></CoverTextureImage>
+            </CreatorTitleContainer>
+          </CreatorTitleSection>
+          <GlowEffectCover></GlowEffectCover>
+        </SealBackground>
+        <SealCover onMouseMove={ rotateSeal } onMouseLeave={ resetSeal }></SealCover>
+      </SealContainer>
+    </>
   );
 });
 

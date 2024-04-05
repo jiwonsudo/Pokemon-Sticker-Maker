@@ -5,6 +5,7 @@ const SealBackground = styled.div`
   height: 100%;
   background-color: #f6f3f3;
   overflow: hidden;
+  position: relative;
 `;
 
 export default SealBackground;
