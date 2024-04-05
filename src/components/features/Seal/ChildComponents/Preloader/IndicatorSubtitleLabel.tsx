@@ -5,6 +5,7 @@ const IndicatorSubtitleLabel = styled.div`
   font-size: 12px;
   font-family: 'Galmuri11';
   color: #414141;
+  line-height: 15px;
 `;
 
 export default IndicatorSubtitleLabel;

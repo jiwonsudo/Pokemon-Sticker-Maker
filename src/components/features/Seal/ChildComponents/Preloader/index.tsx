@@ -23,7 +23,7 @@ const PreloaderView = ({ spinnerAnimationUrl }: PreloaderProps) => {
       <FullCover>
         <IndicatorContainer>
           <IndicatorTitleLabel>이미지 가공 중</IndicatorTitleLabel>
-          <IndicatorSubtitleLabel>잠시만 기다려 주세요...</IndicatorSubtitleLabel>
+          <IndicatorSubtitleLabel>잠시만 기다려 주세요...<br/>최대 30초 정도 소요됩니다.</IndicatorSubtitleLabel>
           <SpinnerAnimation type="image/svg+xml" data={ spinnerAnimationUrl }></SpinnerAnimation>
         </IndicatorContainer>
       </FullCover>
