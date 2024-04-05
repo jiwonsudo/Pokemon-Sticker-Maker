@@ -33,7 +33,7 @@ interface SealProps {
   isLoading: boolean,
 }
 
-const Seal = ({ sealInfo }: ContentProps) => {
+const Seal = ({ sealInfo, sendSealImg }: ContentProps) => {
   const sealBg = useRef<HTMLDivElement>(null);
   const [sealId, setSealId] = useState('');
   const [sealName, setSealName] = useState('');
@@ -65,7 +65,9 @@ const Seal = ({ sealInfo }: ContentProps) => {
       }
       fileReader.readAsDataURL(sealData[2]);
     } else setSealImgUrl(defaultImg);
-  }, [sealInfo]);
+
+    sendSealImg!(sealBg!.current!);
+  }, [sealInfo, sendSealImg]);
 
   const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;

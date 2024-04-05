@@ -1,4 +1,6 @@
 import React, { useCallback, useRef } from "react";
+import html2canvas from "html2canvas";
+import { saveAs } from 'file-saver';
 
 import Button from "./ChildComponents/Button";
 import Label from "./ChildComponents/Label";
@@ -30,7 +32,7 @@ interface ControllerProps {
   downIcon: string,
 }
 
-const Controller = ({ updateSeal }: ContentProps) => {
+const Controller = ({ updateSeal, sealResult }: ContentProps) => {
   const selectedImg = useRef<File | string>(defaultImg);
 
   const tfId = useRef<HTMLInputElement>(null);
@@ -56,6 +58,21 @@ const Controller = ({ updateSeal }: ContentProps) => {
     updateSeal!(tfIdValue, tfNameValue, selectedImg.current);
   }, [updateSeal]);
 
+  const onDownloadSeal = useCallback(async () => {    
+    if (sealResult) {
+      try {
+        const canvas = await html2canvas(sealResult, { scale: 2 });
+        canvas.toBlob((blob) => {
+          if (blob) {
+            saveAs(blob, 'sticker.png');
+          }
+        });
+      } catch (error) {
+        console.error('Fail to save image - error:', error);
+      }
+    }
+  }, []);
+
   const props: ControllerProps = {
     picBtnProps: {
       $bgColor: '#54E50C',
@@ -79,7 +96,7 @@ const Controller = ({ updateSeal }: ContentProps) => {
     tfName: tfName,
     onUploadImg: onUploadImg,
     onGenerate: onGenerate,
-    onDownloadSeal: () => {},
+    onDownloadSeal: onDownloadSeal,
     picIcon: picIcon,
     genIcon: genIcon,
     downIcon: downIcon,
