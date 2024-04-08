@@ -40,35 +40,6 @@ const Seal = ({ sealInfo, sendSealImg }: ContentProps) => {
   const [sealImgUrl, setSealImgUrl] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const sealData = sealInfo!
-
-    let config: Config = {
-      progress: (key, current, total) => {
-        console.log(`${key}: ${current} of ${total}`);
-        if (key === 'compute:inference' && current === 1) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    setSealId(String(sealData[0]));
-    setSealName(String(sealData[1]));
-
-    if (sealData[2] instanceof File) {
-      setIsLoading(true);
-      const fileReader = new FileReader();
-      fileReader.onload = async () => {
-        const imgUrl = String(fileReader.result);
-        const bgRemovedImg: Blob = await removeBackground(imgUrl, config);
-        setSealImgUrl(URL.createObjectURL(bgRemovedImg));
-      }
-      fileReader.readAsDataURL(sealData[2]);
-    } else setSealImgUrl(defaultImg);
-
-    sendSealImg!(sealBg!.current!);
-  }, [sealInfo, sendSealImg]);
-
   const rotateSeal = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const cursorPosX = event.nativeEvent.offsetX;
     const cursorPosY = event.nativeEvent.offsetY;
@@ -95,6 +66,39 @@ const Seal = ({ sealInfo, sendSealImg }: ContentProps) => {
     const max = Math.floor(colorArr.length);
     return colorArr[Math.floor(Math.random() * (max - min + 1)) + min];
   }, []);
+
+  useEffect(() => {
+    const sealData = sealInfo!
+
+    let config: Config = {
+      progress: (key, current, total) => {
+        console.log(`${key}: ${current} of ${total}`);
+        if (key === 'compute:inference' && current === 1) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    setSealId(String(sealData[0]));
+    setSealName(String(sealData[1]));
+
+    if (sealData[2] instanceof File) {
+      setIsLoading(true);
+      const fileReader = new FileReader();
+      fileReader.onload = async () => {
+        const imgUrl = String(fileReader.result);
+        try {
+          const bgRemovedImg: Blob = await removeBackground(imgUrl, config);
+          setSealImgUrl(URL.createObjectURL(bgRemovedImg));
+        } catch (err) {
+          console.error('Error while processing image:', err);
+        }
+      }
+      fileReader.readAsDataURL(sealData[2]);
+    } else setSealImgUrl(defaultImg);
+
+    sendSealImg!(sealBg!.current!);
+  }, [sealInfo, sendSealImg]);
 
   const props = {
     id: sealId,
