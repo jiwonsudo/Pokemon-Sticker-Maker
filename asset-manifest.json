@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/Pokemon-Sticker-Maker/static/css/main.90f6920e.css",
+    "main.js": "/Pokemon-Sticker-Maker/static/js/main.22efbe84.js",
+    "static/js/453.67f74a86.chunk.js": "/Pokemon-Sticker-Maker/static/js/453.67f74a86.chunk.js",
+    "static/media/PretendardVariable.woff2": "/Pokemon-Sticker-Maker/static/media/PretendardVariable.36b3a87cd98126711b2b.woff2",
+    "static/media/Galmuri11.woff2": "/Pokemon-Sticker-Maker/static/media/Galmuri11.ed407efeac42d03099c5.woff2",
+    "static/media/default.png": "/Pokemon-Sticker-Maker/static/media/default.36fc10d0b475e3699c52.png",
+    "static/media/logo.svg": "/Pokemon-Sticker-Maker/static/media/logo.e4e859ef37aa52fe76a2a14ee74a7f3d.svg",
+    "static/media/upload.svg": "/Pokemon-Sticker-Maker/static/media/upload.2ac256a111da25524218904caa48da39.svg",
+    "static/media/download.svg": "/Pokemon-Sticker-Maker/static/media/download.310a37ad8e4cf542e86a1aef4b673619.svg",
+    "index.html": "/Pokemon-Sticker-Maker/index.html",
+    "static/media/sticker.svg": "/Pokemon-Sticker-Maker/static/media/sticker.817cf5d283eb8e418c88a5f5b4b9eeb3.svg",
+    "static/media/spinner.svg": "/Pokemon-Sticker-Maker/static/media/spinner.4f961365e74d8d7d5178e7c138f4f87b.svg",
+    "main.90f6920e.css.map": "/Pokemon-Sticker-Maker/static/css/main.90f6920e.css.map",
+    "main.22efbe84.js.map": "/Pokemon-Sticker-Maker/static/js/main.22efbe84.js.map",
+    "453.67f74a86.chunk.js.map": "/Pokemon-Sticker-Maker/static/js/453.67f74a86.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.90f6920e.css",
+    "static/js/main.22efbe84.js"
+  ]
+}
